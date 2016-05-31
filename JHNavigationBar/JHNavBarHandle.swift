@@ -10,19 +10,19 @@ class JHNavBarHandle: NSObject {
     
     class func handleJHNavigationBarAlpha(scroll:UIScrollView,uiviewcontoller:UIViewController){
         uiviewcontoller.automaticallyAdjustsScrollViewInsets = false
-        var overlayColor = uiviewcontoller.navigationController?.navigationBar.overlayColor
-        var offsetY = scroll.contentOffset.y
+        let overlayColor = uiviewcontoller.navigationController?.navigationBar.overlayColor
+        let offsetY = scroll.contentOffset.y
         if offsetY > 50{
             let alpha = 1 - ((50+64-offsetY)/64)
             uiviewcontoller.navigationController?.navigationBar.jh_setBackgroundColor(overlayColor!.colorWithAlphaComponent(alpha))
         }else{
-         uiviewcontoller.navigationController?.navigationBar.jh_setBackgroundColor(overlayColor!.colorWithAlphaComponent(0))
+            uiviewcontoller.navigationController?.navigationBar.jh_setBackgroundColor(overlayColor!.colorWithAlphaComponent(0))
         }
     }
     
     class func handleJHNavigationBarHeight(scroll:UIScrollView,uiviewcontoller:UIViewController){
         uiviewcontoller.automaticallyAdjustsScrollViewInsets = false
-        var offsetY = scroll.contentOffset.y
+        let offsetY = scroll.contentOffset.y
         if offsetY > 0{
             if(offsetY >= 44){
                 self.setNavigationBarTransformProgress(uiviewcontoller,progress: 1)
@@ -33,7 +33,7 @@ class JHNavBarHandle: NSObject {
             self.setNavigationBarTransformProgress(uiviewcontoller,progress: 0)
             uiviewcontoller.navigationController?.navigationBar.backIndicatorImage = nil
             uiviewcontoller.navigationController?.navigationBar.backIndicatorTransitionMaskImage = nil
-
+            
         }
     }
     
