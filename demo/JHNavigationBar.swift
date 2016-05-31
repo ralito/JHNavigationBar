@@ -28,7 +28,7 @@ extension UINavigationBar {
                     self,
                     &AssociatedKeys.overLay,
                     newValue as UIView?,
-                    UInt(OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+                    objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC
                 )
             }
         }
@@ -43,7 +43,7 @@ extension UINavigationBar {
                     self,
                     &AssociatedKeys.overlayColor,
                     newValue as UIColor?,
-                    UInt(OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+                    objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC
                 )
             }
         }
@@ -58,17 +58,17 @@ extension UINavigationBar {
                     self,
                     &AssociatedKeys.emptyImage,
                     newValue as UIImage?,
-                    UInt(OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+                    objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC
                 )
             }
         }
     }
     
     func jh_setBackgroundColor(color:UIColor){
-        self.shadowImage = UIImage.new()
-        if let jh_Overlay = overlay{
+        self.shadowImage = UIImage()
+        if overlay != nil{
         }else{
-            self.setBackgroundImage(UIImage.new(), forBarMetrics: UIBarMetrics.Default)
+            self.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
             overlay = UIView(frame:CGRectMake(0, -20, UIScreen.mainScreen().bounds.size.width, CGRectGetHeight(self.bounds)+20))
             overlay?.userInteractionEnabled = false
             self.insertSubview(overlay!, atIndex: 0)
@@ -81,25 +81,25 @@ extension UINavigationBar {
     }
     
     func jh_setContentAlpha(alpha:CGFloat){
-        if let jh_Overlay = overlay{
+        if overlay != nil{
             self.jh_setAlphaForSubviewsOfView(alpha, view: self)
             if alpha == 1 {
-                if let emptyImage = self.emptyImage{
+                if self.emptyImage != nil{
                 }else{
-                    self.emptyImage = UIImage.new()
+                    self.emptyImage = UIImage()
                 }
                 self.backIndicatorImage = self.emptyImage
                 self.backIndicatorTransitionMaskImage = self.emptyImage
             }
         }else{
-            if let barTint = self.barTintColor{
+            if self.barTintColor != nil{
                 self.jh_setBackgroundColor(self.barTintColor!)
             }
         }
     }
     
     func jh_setAlphaForSubviewsOfView(alpha:CGFloat,view:UIView){
-        for subview in view.subviews as! [UIView]{
+        for subview in view.subviews {
             if subview .isEqual(self.overlay) {
                 continue
             }

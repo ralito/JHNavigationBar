@@ -17,7 +17,7 @@ class ViewController: UIViewController,UIScrollViewDelegate {
         
 
         // case1:
-        var color = UIColor(red: 25/255, green: 144/255, blue: 211/255, alpha: 1)
+        let color = UIColor(red: 25/255, green: 144/255, blue: 211/255, alpha: 1)
         self.navigationController?.navigationBar.overlayColor = color
         
     }
@@ -56,7 +56,7 @@ extension ViewController:UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell")!
         cell.textLabel?.text = "test\(indexPath.row)"
         return cell;
     }
